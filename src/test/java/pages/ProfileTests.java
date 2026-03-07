@@ -7,7 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -43,7 +47,14 @@ public class ProfileTests extends BaseTest {
         MainPage mainPage = new MainPage(driver);
         mainPage.clickConstructorButton();
 
-        assertTrue(driver.getCurrentUrl().contains("/"));
+
+        WebElement constructorHeader = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//h1[text()='Соберите бургер']")
+                ));
+
+        assertTrue(constructorHeader.isDisplayed(),
+                "Заголовок 'Соберите бургер' должен быть виден после перехода в конструктор");
     }
 
     @Test
@@ -54,7 +65,13 @@ public class ProfileTests extends BaseTest {
         MainPage mainPage = new MainPage(driver);
         mainPage.clickLogo();
 
-        assertTrue(driver.getCurrentUrl().contains("/"));
+        WebElement constructorHeader = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//h1[text()='Соберите бургер']")
+                ));
+
+        assertTrue(constructorHeader.isDisplayed(),
+                "После клика по логотипу должна открыться главная страница с конструктором");
     }
 
     @Test
@@ -66,7 +83,6 @@ public class ProfileTests extends BaseTest {
 
         profilePage.clickLoginButtonProfile();
         profilePage.clickLogout();
-        // 4. Ждём редиректа и появления индикатора разлогинивания
         boolean isLoggedOut = wait.until(d -> {
             String url = d.getCurrentUrl();
             if (url.contains("/login")) {

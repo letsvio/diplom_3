@@ -1,7 +1,6 @@
 package pages;
 
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+
 import pages.api.UserClient;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.AfterEach;
@@ -47,17 +46,16 @@ public abstract class BaseTest {
         ));
     }
 
+
     @AfterEach
     @Step("Удаление пользователя и закрытие браузера")
     void tearDown() {
-
         if (userEmail != null) {
             String token = UserClient.loginAndGetToken(userEmail, userPassword);
-            if (token != null) {
+            if (token != null && !token.isEmpty()) {
                 UserClient.deleteUser("Bearer " + token);
             }
         }
-
         if (driver != null) {
             driver.quit();
         }

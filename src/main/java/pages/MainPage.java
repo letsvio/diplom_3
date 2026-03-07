@@ -90,17 +90,6 @@ public class MainPage extends BasePage {
         }
     }
 
-    public By getBunsTabLocator() {
-        return bunsTab;
-    }
-
-    public By getSaucesTabLocator() {
-        return saucesTab;
-    }
-
-    public By getFillingsTabLocator() {
-        return fillingsTab;
-    }
 
     private void reliableClick(By locator) {
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));

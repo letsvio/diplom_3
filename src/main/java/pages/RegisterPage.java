@@ -58,9 +58,8 @@ public class RegisterPage extends BasePage {
     public void clickRandomLocationOnPage() {
         Dimension size = driver.manage().window().getSize();
 
-        // Получаем случайные координаты внутри видимой области (с небольшим отступом от краёв)
-        int x = new Random().nextInt(size.getWidth() - 200) + 100;   // от 100 до width-100
-        int y = new Random().nextInt(size.getHeight() - 200) + 100;  // от 100 до height-100
+        int x = new Random().nextInt(size.getWidth() - 200) + 100;
+        int y = new Random().nextInt(size.getHeight() - 200) + 100;
 
         new Actions(driver)
                 .moveByOffset(x, y)
@@ -71,7 +70,6 @@ public class RegisterPage extends BasePage {
     @Step("Нажать кнопку «Войти»")
     public void clickLoginLink() {
         WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(loginLink));
-        // Прокрутка + JS-клик (надёжно для React)
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", btn);
         try { Thread.sleep(800); } catch (InterruptedException ignored) {}
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);

@@ -62,38 +62,21 @@ public class ProfilePage extends BasePage {
         }
     }
 
-    @Step("Проверить, что на странице есть кнопка регистрации")
-    public Boolean isProfilePageLoadedRegisterButton() {
-        try {
-            waitForVisibility(registerButton);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
-    @Step("Нажать кнопку «Войти» (надёжный способ: Actions + JS-клик)")
+    @Step("Нажать кнопку «Войти»")
     public void clickLoginButtonProfile() {
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(profileButton));
 
-        // 1. Прокрутка к кнопке в центр видимой области
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].scrollIntoView({block: 'center', inline: 'center'});", button);
 
-        // 2. Задержка на завершение скролла/анимации (важно!)
+        wait.until(ExpectedConditions.elementToBeClickable(button));
+
         try {
-            Thread.sleep(800);
-        } catch (InterruptedException ignored) {}
-
-        // 3. Actions: наводим курсор точно в центр и кликаем
-        new Actions(driver)
-                .moveToElement(button)
-                .pause(300)
-                .click()
-                .perform();
-
-        // 4. На всякий случай — JS-клик (если Actions не сработает)
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+            button.click();
+        } catch (Exception e) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+        }
     }
 
 

@@ -81,19 +81,4 @@ public class LoginTests extends BaseTest {
                 "Профиль не открылся после входа через страницу регистрации");
     }
 
-    @AfterEach
-    @Override
-    @Step("Удаление созданного пользователя после теста")
-    void tearDown() {
-        // Удаляем пользователя, созданного именно в этом тесте
-        if (testEmail != null) {
-            String token = UserClient.loginAndGetToken(testEmail, testPassword);
-            if (token != null && !token.isEmpty()) {
-                UserClient.deleteUser("Bearer " + token);
-            }
-        }
-
-        // Закрываем браузер (родительский tearDown)
-        super.tearDown();
-    }
 }

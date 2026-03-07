@@ -21,15 +21,7 @@ public class RegistrationTests extends BaseTest {
     private String testPassword;
     private String testName;
 
-    @BeforeEach
-    @Override
-    @Step("Создание нового пользователя перед каждым тестом авторизации")
-    void setUp() {
-        super.setUp(); // браузер + ожидание главной
-        testEmail = FakerData.email();
-        testPassword = FakerData.password();
-        testName = FakerData.name();
-    }
+
 
     @Test
     @DisplayName("Успешная регистрация")
@@ -37,8 +29,12 @@ public class RegistrationTests extends BaseTest {
         MainPage mainPage = new MainPage(driver);
         mainPage.clickLoginButton();
 
+        testEmail = FakerData.email();
+        testPassword = FakerData.password();
+        testName = FakerData.name();
+
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.clickRegisterLink();  // ← это было пропущено
+        loginPage.clickRegisterLink();
 
         RegisterPage registerPage = new RegisterPage(driver);
         registerPage.enterName(testName);
@@ -60,6 +56,9 @@ public class RegistrationTests extends BaseTest {
     void shortPasswordError() {
         MainPage mainPage = new MainPage(driver);
         mainPage.clickLoginButton();
+
+        testEmail = FakerData.email();
+        testName = FakerData.name();
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.clickRegisterLink();  // ← ОБЯЗАТЕЛЬНО! Переход на страницу регистрации

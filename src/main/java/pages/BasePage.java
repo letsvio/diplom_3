@@ -20,10 +20,6 @@ public abstract class BasePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    @Step("Открыть главную страницу Stellar Burgers")
-    public void openMainPage() {
-        driver.get(BASE_URL);
-    }
 
     @Step("Ожидать видимость элемента: {locator}")
     protected void waitForVisibility(By locator) {
