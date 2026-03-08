@@ -1,0 +1,60 @@
+package pages;
+
+import io.qameta.allure.Description;
+import io.qameta.allure.junit5.AllureJunit5;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@ExtendWith(AllureJunit5.class)
+@DisplayName("Тесты авторизации")
+public class LoginTests extends BaseTest {
+
+
+    @Test
+    @DisplayName("Вход через кнопку «Войти в аккаунт»")
+    @Description("Переход → ввод данных → профиль открыт")
+    void loginFromMainPageButton() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.clickLoginButton();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(testEmail, testPassword);
+
+        assertTrue(new ProfilePage(driver).isProfilePageLoadedButtonPostOrder(),
+                "Профиль не открылся после входа через кнопку «Войти в аккаунт»");
+    }
+
+    @Test
+    @DisplayName("Вход через «Личный кабинет»")
+    @Description("Клик по «Личный кабинет» → ввод данных → профиль открыт")
+    void loginFromProfileButton() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.clickProfileButton();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(testEmail, testPassword);
+
+        assertTrue(new ProfilePage(driver).isProfilePageLoadedButtonPostOrder(),
+                "Профиль не открылся после входа через «Личный кабинет»");
+    }
+
+    @Test
+    @DisplayName("Вход через страницу регистрации")
+    @Description("Главная → вход → регистрация → вход → профиль открыт")
+    void loginFromRegistrationPage() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.clickLoginButton();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.clickRegisterLink();
+        RegisterPage registerPage = new RegisterPage(driver);
+        registerPage.clickLoginLink();
+        loginPage.login(testEmail, testPassword);
+        assertTrue(new ProfilePage(driver).isProfilePageLoadedButtonPostOrder(),
+                "Профиль не открылся после входа через страницу регистрации");
+    }
+
+}
