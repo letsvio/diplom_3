@@ -50,7 +50,6 @@ public class RegisterPage extends BasePage {
     public void clickRegisterButton() {
         WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(registerButton));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", btn);
-        try { Thread.sleep(800); } catch (InterruptedException ignored) {}
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
     }
 
@@ -71,7 +70,6 @@ public class RegisterPage extends BasePage {
     public void clickLoginLink() {
         WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(loginLink));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", btn);
-        try { Thread.sleep(800); } catch (InterruptedException ignored) {}
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
     }
 

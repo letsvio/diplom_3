@@ -5,16 +5,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ProfilePage extends BasePage {
 
-    private final By logoutButton = By.xpath("//button[text()='Выход']");
+
     private final By buttonPostOrder = By.xpath("//button[text()='Оформить заказ']");
     private final By profileButton = By.xpath("//p[text()='Личный Кабинет']");
     private final By profileString = By.xpath("//a[normalize-space(text())='Профиль']");
-    private final By registerButton = By.xpath("//a[text()='Зарегистрироваться']");
+
 
     public ProfilePage(WebDriver driver) {
         super(driver);
@@ -36,9 +35,7 @@ public class ProfilePage extends BasePage {
         By logoutButton = By.xpath("//button[contains(text(),'Выход')]");
         WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(logoutButton));
 
-        // Прокрутка + JS-клик (самый надёжный способ)
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", btn);
-        try { Thread.sleep(500); } catch (InterruptedException ignored) {}
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
     }
 

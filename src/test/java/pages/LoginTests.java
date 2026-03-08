@@ -1,15 +1,10 @@
 package pages;
 
-import pages.api.UserClient;
 import io.qameta.allure.Description;
-import io.qameta.allure.Step;
 import io.qameta.allure.junit5.AllureJunit5;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import utils.FakerData;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,25 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @DisplayName("Тесты авторизации")
 public class LoginTests extends BaseTest {
 
-    // Локальные переменные для пользователя в каждом тесте
-    private String testEmail;
-    private String testPassword;
-    private String testName;
-
-    @BeforeEach
-    @Override
-    @Step("Создание нового пользователя перед каждым тестом авторизации")
-    void setUp() {
-        super.setUp(); // вызов родительского метода (браузер + базовое ожидание)
-
-        // Генерируем нового пользователя для каждого теста
-        testEmail = FakerData.email();
-        testPassword = FakerData.password();
-        testName = FakerData.name();
-
-        // Регистрируем через API (быстрее и надёжнее, чем UI)
-        UserClient.createUser(testEmail, testPassword, testName);
-    }
 
     @Test
     @DisplayName("Вход через кнопку «Войти в аккаунт»")

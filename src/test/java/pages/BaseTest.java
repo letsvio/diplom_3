@@ -18,19 +18,18 @@ public abstract class BaseTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-    protected String userEmail;
-    protected String userPassword;
-    protected String userName;
+    protected String testEmail;
+    protected String testPassword;
+    protected String testName;
 
     @BeforeEach
     @Step("Подготовка тестового пользователя и открытие браузера")
     void setUp() {
 
-        // Генерация данных
-        userEmail = FakerData.email();
-        userPassword = FakerData.password();
-        userName = FakerData.name();
-        UserClient.createUser(userEmail, userPassword, userName);
+        testEmail = FakerData.email();
+        testPassword = FakerData.password();
+        testName = FakerData.name();
+        UserClient.createUser(testEmail, testPassword, testName);
         String browserName = System.getProperty("browser", "chrome");
 
         boolean isHeadless = Boolean.parseBoolean(System.getProperty("headless", "true"));
@@ -50,8 +49,8 @@ public abstract class BaseTest {
     @AfterEach
     @Step("Удаление пользователя и закрытие браузера")
     void tearDown() {
-        if (userEmail != null) {
-            String token = UserClient.loginAndGetToken(userEmail, userPassword);
+        if (testEmail != null) {
+            String token = UserClient.loginAndGetToken(testEmail, testPassword);
             if (token != null && !token.isEmpty()) {
                 UserClient.deleteUser("Bearer " + token);
             }

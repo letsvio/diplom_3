@@ -1,9 +1,7 @@
 package pages;
 
 import io.qameta.allure.Description;
-import io.qameta.allure.Step;
 import io.qameta.allure.junit5.AllureJunit5;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,12 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(AllureJunit5.class)
 @DisplayName("Тесты регистрации")
 public class RegistrationTests extends BaseTest {
-
-
-    private String testEmail;
-    private String testPassword;
-    private String testName;
-
 
 
     @Test

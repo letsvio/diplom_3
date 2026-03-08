@@ -19,7 +19,6 @@ public class Browser {
                 options.addArguments("--disable-gpu");            // иногда требуется в headless
             }
 
-            // Общие настройки для стабильности
             options.addArguments("--disable-infobars");
             options.addArguments("--disable-notifications");
             options.addArguments("--disable-extensions");
@@ -29,11 +28,9 @@ public class Browser {
         }
 
         if ("yandex".equalsIgnoreCase(browserName)) {
-            // Путь к YandexDriver (убедись, что он реально существует)
             System.setProperty("webdriver.chrome.driver", "C:\\tools\\yandexdriver.exe");
 
             ChromeOptions options = new ChromeOptions();
-            // Путь к исполняемому файлу Yandex Browser
             options.setBinary("C:\\Users\\violence\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
 
             if (headless) {
@@ -44,7 +41,6 @@ public class Browser {
                 options.addArguments("--disable-gpu");
             }
 
-            // Общие настройки
             options.addArguments("--disable-infobars");
             options.addArguments("--disable-notifications");
             options.addArguments("--start-maximized");
@@ -55,9 +51,7 @@ public class Browser {
         throw new IllegalArgumentException("Неизвестный браузер: " + browserName);
     }
 
-    /**
-     * Совместимость со старым кодом — по умолчанию запускает в headless-режиме
-     */
+
     public WebDriver getWebDriver(String browserName) {
         return getWebDriver(browserName, true);
     }

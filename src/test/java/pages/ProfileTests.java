@@ -24,7 +24,7 @@ public class ProfileTests extends BaseTest {
         mainPage.clickLoginButton();
 
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login(userEmail, userPassword);
+        loginPage.login(testEmail, testPassword);
     }
 
     @Test

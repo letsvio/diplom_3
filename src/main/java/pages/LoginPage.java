@@ -32,23 +32,16 @@ public class LoginPage extends BasePage {
     public void clickLoginButton() {
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(loginButton));
 
-        // 1. Прокрутка к кнопке в центр видимой области
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].scrollIntoView({block: 'center', inline: 'center'});", button);
 
-        // 2. Задержка на завершение скролла/анимации (важно!)
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException ignored) {}
 
-        // 3. Actions: наводим курсор точно в центр и кликаем
         new Actions(driver)
                 .moveToElement(button)
                 .pause(300)
                 .click()
                 .perform();
 
-        // 4. На всякий случай — JS-клик (если Actions не сработает)
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
     }
 
